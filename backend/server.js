@@ -7,6 +7,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') }); // Backend .en
 require('dotenv').config(); // Fallback for process.cwd()
 
 const { testConnection } = require('./config/db');
+const { initDB } = require('./scripts/init-db');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const complaintRoutes = require('./routes/complaintRoutes');
@@ -64,6 +65,16 @@ app.get('/api/health', async (req, res) => {
     });
 });
 
+// Database auto-setup endpoint
+app.get('/api/setup-db', async (req, res) => {
+    try {
+        await initDB();
+        res.json({ success: true, message: 'Database tables and admin account verified/created successfully!' });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
 // Fallback to frontend index.html for root
 app.get('/', (req, res) => {
     res.sendFile(path.join(frontendPath, 'index.html'));
@@ -89,9 +100,15 @@ app.listen(PORT, async () => {
     const dbStatus = await testConnection();
     if (dbStatus.success) {
         console.log('✅ Connected to MySQL database successfully.');
+        try {
+            await initDB();
+            console.log('✅ Database tables & admin account verified.');
+        } catch (initErr) {
+            console.warn('⚠️  Auto-migration notice:', initErr.message);
+        }
     } else {
         console.warn('⚠️  MySQL connection warning:', dbStatus.error);
-        console.warn('   Please ensure MySQL is running and DB_PASSWORD in backend/.env is correct.');
+        console.warn('   Please ensure MySQL is running and DB_PASSWORD in .env is correct.');
     }
 });
 

@@ -133,18 +133,26 @@ async function initDB() {
         }
 
         console.log('Database initialization completed successfully!');
-        process.exit(0);
+        return { success: true };
     } catch (err) {
         console.error('Database initialization error:', err.message);
         if (err.code === 'ER_ACCESS_DENIED_ERROR') {
-            console.error('\nNOTE: MySQL access denied. Please verify DB_USER and DB_PASSWORD in backend/.env.');
+            console.error('\nNOTE: MySQL access denied. Please verify DB_USER and DB_PASSWORD.');
         }
-        process.exit(1);
+        throw err;
     } finally {
         if (connection) {
-            await connection.end();
+            try {
+                await connection.end();
+            } catch (e) {}
         }
     }
 }
 
-initDB();
+if (require.main === module) {
+    initDB()
+        .then(() => process.exit(0))
+        .catch(() => process.exit(1));
+}
+
+module.exports = { initDB };
