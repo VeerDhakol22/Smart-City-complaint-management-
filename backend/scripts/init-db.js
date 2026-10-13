@@ -29,11 +29,19 @@ async function initDB() {
                 user: process.env.DB_USER || 'root',
                 password: process.env.DB_PASSWORD || ''
             };
-            if (process.env.DB_SSL === 'true') {
+            const hostStr = process.env.DB_HOST || '';
+            if (process.env.DB_SSL === 'true' || hostStr.includes('aivencloud.com') || hostStr.includes('tidbcloud.com')) {
                 connOptions.ssl = { rejectUnauthorized: false };
             }
+            if (connOptions.database) {
+                connOptions.database = dbName;
+            }
             connection = await mysql.createConnection(connOptions);
-            await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\`;`);
+            try {
+                await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\`;`);
+            } catch (dbErr) {
+                // Cloud MySQL instances (like Aiven) may manage databases via their portal
+            }
             await connection.query(`USE \`${dbName}\`;`);
         }
         console.log(`Connected to MySQL server. Database '${dbName}' verified/created.`);

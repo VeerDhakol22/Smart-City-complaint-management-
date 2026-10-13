@@ -26,8 +26,9 @@ if (process.env.DATABASE_URL || process.env.MYSQL_URL) {
         queueLimit: 0
     };
 
-    // If SSL is explicitly requested (e.g., Aiven, TiDB, Azure, AWS)
-    if (process.env.DB_SSL === 'true') {
+    // If SSL is explicitly requested or connecting to a known cloud provider
+    const hostStr = process.env.DB_HOST || '';
+    if (process.env.DB_SSL === 'true' || hostStr.includes('aivencloud.com') || hostStr.includes('tidbcloud.com')) {
         dbConfig.ssl = { rejectUnauthorized: false };
     }
 }
