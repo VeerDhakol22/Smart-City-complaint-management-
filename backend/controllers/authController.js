@@ -197,7 +197,8 @@ async function adminLogin(req, res) {
         console.error('Admin login error:', err);
         return res.status(500).json({
             success: false,
-            message: 'Internal server error during admin login.'
+            message: 'Internal server error during admin login.',
+            error: err.message
         });
     }
 }
