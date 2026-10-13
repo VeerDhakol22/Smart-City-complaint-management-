@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Registration - Smart City Complaint Management</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="card">
+        <div class="logo">📝</div>
+        <h1>Citizen Registration</h1>
+        <h2>Smart Complaint Portal</h2>
+
+        <form id="registerForm">
+            <input
+                type="text"
+                id="name"
+                placeholder="Full Name"
+                required
+            >
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Email Address"
+                required
+            >
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="10-Digit Mobile Number"
+                maxlength="10"
+                required
+            >
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Password (min. 6 characters)"
+                required
+            >
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required
+            >
+            <button type="submit">
+                Register
+            </button>
+        </form>
+
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+        <a href="index.html">← Back to Home</a>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

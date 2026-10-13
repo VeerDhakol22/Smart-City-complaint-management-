@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Complaint - Smart City Complaint Management</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="logo">🔎</div>
+        <h1>Track Complaint</h1>
+        <p>Enter your Complaint ID to check real-time status and official replies.</p>
+
+        <form id="trackForm">
+            <input
+                type="text"
+                id="complaintId"
+                placeholder="Enter Complaint ID (e.g. CMP-123456-7890)"
+                required
+            >
+            <button type="submit">
+                Track Status
+            </button>
+        </form>
+
+        <div id="result"></div>
+
+        <br>
+        <a href="index.html">
+            ← Back to Home
+        </a>
+        &nbsp;|&nbsp;
+        <a href="dashboard.html">
+            Citizen Dashboard
+        </a>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/complaints.js"></script>
+</body>
+</html>

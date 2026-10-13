@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Smart City Complaint Management</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="logo">🔐</div>
+        <h1>Admin Portal</h1>
+        <h2>Municipal Administration Login</h2>
+
+        <form id="adminLoginForm">
+            <input
+                type="text"
+                id="adminUsername"
+                placeholder="Admin Email or Username"
+                required
+            >
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Admin Password"
+                required
+            >
+            <button type="submit" style="background: #2c3e50;">
+                Admin Login
+            </button>
+        </form>
+
+        <p id="loginMessage" style="color: #e74c3c; font-weight: bold; margin-top: 10px;"></p>
+        <a href="index.html">← Back to Citizen Home</a>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

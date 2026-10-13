@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Dashboard - Smart City Complaint Management</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="logo">👋</div>
+        <h1 id="welcomeText">Welcome</h1>
+        <h2>Citizen Dashboard</h2>
+        <p>Manage your civic complaints and profile from here.</p>
+
+        <div class="buttons">
+            <!-- Submit Complaint -->
+            <button onclick="window.location.href='complaint.html'">
+                📝 Submit Complaint
+            </button>
+
+            <!-- My Complaints -->
+            <button onclick="window.location.href='mycomplaints.html'">
+                📋 My Complaints
+            </button>
+
+            <!-- Track Complaint -->
+            <button onclick="window.location.href='track.html'">
+                🔎 Track Complaint
+            </button>
+
+            <!-- My Profile -->
+            <button onclick="window.location.href='profile.html'">
+                👤 My Profile
+            </button>
+
+            <!-- Edit Profile -->
+            <button onclick="window.location.href='edit-profile.html'">
+                ✏️ Edit Profile
+            </button>
+
+            <!-- Change Password -->
+            <button onclick="window.location.href='change-password.html'">
+                🔐 Change Password
+            </button>
+
+            <!-- Logout -->
+            <button onclick="logout()" style="background: #e74c3c;">
+                🚪 Logout
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

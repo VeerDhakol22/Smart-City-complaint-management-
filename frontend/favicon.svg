@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Background -->
+  <rect width="64" height="64" rx="14" fill="url(#bgGrad)" />
+
+  <!-- Municipal Capitol / Civic Building Icon -->
+  <g filter="url(#shadow)" fill="#ffffff">
+    <!-- Pediment / Roof Triangle -->
+    <polygon points="32,10 14,21 50,21" />
+
+    <!-- Entablature / Roof Base Beam -->
+    <rect x="15" y="22" width="34" height="3" rx="1" />
+
+    <!-- Four Classical Pillars -->
+    <rect x="18" y="27" width="4" height="18" rx="1" />
+    <rect x="26" y="27" width="4" height="18" rx="1" />
+    <rect x="34" y="27" width="4" height="18" rx="1" />
+    <rect x="42" y="27" width="4" height="18" rx="1" />
+
+    <!-- Stylobate / Base Foundation Steps -->
+    <rect x="14" y="46" width="36" height="3" rx="1" />
+    <rect x="12" y="50" width="40" height="4" rx="1.5" />
+  </g>
+
+  <!-- Verified Civic Badge Checkmark -->
+  <circle cx="46" cy="46" r="10" fill="url(#badgeGrad)" stroke="#ffffff" stroke-width="2" />
+  <polyline points="42,46 45,49 51,43" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+

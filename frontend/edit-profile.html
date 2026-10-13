@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Smart City Complaint Management</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="logo">✏️</div>
+        <h1>Edit Profile</h1>
+        <h2>Update Your Contact Information</h2>
+
+        <form id="editProfileForm">
+            <input
+                type="text"
+                id="editName"
+                placeholder="Full Name"
+                required
+            >
+            <input
+                type="email"
+                id="editEmail"
+                placeholder="Email Address"
+                readonly
+                style="background: #eee; cursor: not-allowed;"
+            >
+            <input
+                type="tel"
+                id="editMobile"
+                placeholder="10-Digit Mobile Number"
+                maxlength="10"
+                required
+            >
+            <button type="submit">
+                Save Changes
+            </button>
+        </form>
+
+        <br>
+        <a href="profile.html">
+            ← Back to Profile
+        </a>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

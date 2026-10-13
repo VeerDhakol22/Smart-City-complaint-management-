@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Operations Command Center - Smart City</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-body">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="admin-topbar">
+        <div class="admin-topbar-brand">
+            <span class="topbar-logo">🏛️</span>
+            <div>
+                <h1 class="topbar-title">Smart City Municipal Portal</h1>
+                <p class="topbar-subtitle">Grievance Operations Command Center</p>
+            </div>
+        </div>
+
+        <div class="admin-topbar-actions">
+            <div class="admin-badge">
+                <span class="admin-avatar">👨‍💼</span>
+                <div class="admin-info">
+                    <strong id="adminNameDisplay">Municipal Admin</strong>
+                    <small id="adminEmailDisplay">admin@smartcity.gov</small>
+                </div>
+            </div>
+            <button onclick="adminLogout()" class="admin-logout-btn">
+                🚪 Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="admin-main-container">
+        
+        <!-- SYSTEM NOTICE BANNER -->
+        <div class="admin-alert-banner">
+            <span class="alert-icon">ℹ️</span>
+            <div>
+                <strong>Internal Governance Notice:</strong> Real-time municipal grievance tracking. Status modifications and official replies are recorded directly in the citizen tracking ledger.
+            </div>
+        </div>
+
+        <!-- DASHBOARD HEADING & FILTER TITLE -->
+        <div class="dashboard-header-flex">
+            <div>
+                <h2 class="section-title">Grievance Overview & Tasks</h2>
+                <p class="section-desc">Click any task button below to filter complaints instantly by status.</p>
+            </div>
+            <div id="activeFilterBadge" class="active-filter-pill">
+                Showing: <strong>Total Tasks</strong>
+            </div>
+        </div>
+
+        <!-- INTERACTIVE TASK FILTER BUTTON CARDS -->
+        <div class="stat-btn-grid">
+            <!-- 1. Total Tasks Button -->
+            <button class="stat-card-btn active" data-filter="All" onclick="selectStatusFilter('All')">
+                <div class="stat-card-header">
+                    <span class="stat-icon stat-icon-total">📊</span>
+                    <span class="stat-tag">All Records</span>
+                </div>
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">Total Tasks</div>
+            </button>
+
+            <!-- 2. Pending Tasks Button -->
+            <button class="stat-card-btn" data-filter="Pending" onclick="selectStatusFilter('Pending')">
+                <div class="stat-card-header">
+                    <span class="stat-icon stat-icon-pending">⏳</span>
+                    <span class="stat-tag stat-tag-pending">Needs Action</span>
+                </div>
+                <div class="stat-number color-pending" id="pendingCount">0</div>
+                <div class="stat-label">Pending Tasks</div>
+            </button>
+
+            <!-- 3. In Progress Tasks Button -->
+            <button class="stat-card-btn" data-filter="In Progress" onclick="selectStatusFilter('In Progress')">
+                <div class="stat-card-header">
+                    <span class="stat-icon stat-icon-progress">🔄</span>
+                    <span class="stat-tag stat-tag-progress">Under Review</span>
+                </div>
+                <div class="stat-number color-progress" id="progressCount">0</div>
+                <div class="stat-label">In Progress Tasks</div>
+            </button>
+
+            <!-- 4. Resolved Tasks Button -->
+            <button class="stat-card-btn" data-filter="Resolved" onclick="selectStatusFilter('Resolved')">
+                <div class="stat-card-header">
+                    <span class="stat-icon stat-icon-resolved">✅</span>
+                    <span class="stat-tag stat-tag-resolved">Completed</span>
+                </div>
+                <div class="stat-number color-resolved" id="resolvedCount">0</div>
+                <div class="stat-label">Resolved Tasks</div>
+            </button>
+
+            <!-- 5. Cancelled Tasks Button -->
+            <button class="stat-card-btn" data-filter="Cancelled" onclick="selectStatusFilter('Cancelled')">
+                <div class="stat-card-header">
+                    <span class="stat-icon stat-icon-cancelled">❌</span>
+                    <span class="stat-tag stat-tag-cancelled">Closed</span>
+                </div>
+                <div class="stat-number color-cancelled" id="cancelledCount">0</div>
+                <div class="stat-label">Cancelled Tasks</div>
+            </button>
+        </div>
+
+        <!-- QUICK TAB BUTTONS -->
+        <div class="quick-tabs-bar">
+            <span class="tabs-label">Filter Tasks:</span>
+            <button class="tab-pill active" id="tab-All" onclick="selectStatusFilter('All')">
+                📋 All Tasks (<span id="tabCount-All">0</span>)
+            </button>
+            <button class="tab-pill" id="tab-Pending" onclick="selectStatusFilter('Pending')">
+                ⏳ Pending (<span id="tabCount-Pending">0</span>)
+            </button>
+            <button class="tab-pill" id="tab-In Progress" onclick="selectStatusFilter('In Progress')">
+                🔄 In Progress (<span id="tabCount-InProgress">0</span>)
+            </button>
+            <button class="tab-pill" id="tab-Resolved" onclick="selectStatusFilter('Resolved')">
+                ✅ Resolved (<span id="tabCount-Resolved">0</span>)
+            </button>
+            <button class="tab-pill" id="tab-Cancelled" onclick="selectStatusFilter('Cancelled')">
+                ❌ Cancelled (<span id="tabCount-Cancelled">0</span>)
+            </button>
+        </div>
+
+        <!-- SEARCH AND SECONDARY FILTERS TOOLBAR -->
+        <div class="admin-toolbar-card">
+            <div class="toolbar-search-wrap">
+                <span class="search-lens-icon">🔎</span>
+                <input
+                    type="text"
+                    id="searchComplaint"
+                    placeholder="Search by Complaint ID, Title, Citizen Name, Mobile, Location..."
+                    class="toolbar-search-input"
+                >
+                <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="clear-search-btn" title="Clear Search">✕</button>
+            </div>
+
+            <div class="toolbar-select-group">
+                <div class="select-wrapper">
+                    <label for="categoryFilter" class="select-label">Category</label>
+                    <select id="categoryFilter" class="toolbar-select">
+                        <option value="All">All Categories</option>
+                        <option value="Road">Road</option>
+                        <option value="Garbage">Garbage</option>
+                        <option value="Water">Water</option>
+                        <option value="Electricity">Electricity</option>
+                        <option value="Drainage">Drainage</option>
+                        <option value="Street Light">Street Light</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="select-wrapper">
+                    <label for="priorityFilter" class="select-label">Priority</label>
+                    <select id="priorityFilter" class="toolbar-select">
+                        <option value="All">All Priorities</option>
+                        <option value="High">High Priority</option>
+                        <option value="Medium">Medium Priority</option>
+                        <option value="Low">Low Priority</option>
+                    </select>
+                </div>
+
+                <div class="select-wrapper" style="display: none;">
+                    <!-- Hidden sync for legacy select if referenced -->
+                    <select id="statusFilter">
+                        <option value="All">All</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <button onclick="resetAllFilters()" class="toolbar-reset-btn" title="Reset all search and filters">
+                    🔄 Reset Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- RESULTS HEADER -->
+        <div class="results-header-bar">
+            <div>
+                <span class="results-title">Complaints List</span>
+                <span class="results-badge" id="resultsCountBadge">0 records</span>
+            </div>
+            <button onclick="refreshDashboard()" class="refresh-btn" title="Reload live data">
+                ⚡ Refresh
+            </button>
+        </div>
+
+        <!-- COMPLAINTS FEED -->
+        <div id="adminComplaints" class="complaints-feed-container"></div>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION POPUP -->
+    <div id="toastNotification" class="toast-popup"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

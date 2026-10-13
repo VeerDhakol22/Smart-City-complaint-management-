@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Smart City Complaint Management</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="logo">👤</div>
+        <h1>My Profile</h1>
+        <h2>Citizen Information</h2>
+
+        <div class="profile-info">
+            <div class="profile-row">
+                <strong>Name:</strong>
+                <span id="profileName">Loading...</span>
+            </div>
+            <div class="profile-row">
+                <strong>Email:</strong>
+                <span id="profileEmail">Loading...</span>
+            </div>
+            <div class="profile-row">
+                <strong>Mobile:</strong>
+                <span id="profileMobile">Loading...</span>
+            </div>
+        </div>
+
+        <br>
+        <!-- Edit Profile -->
+        <button onclick="window.location.href='edit-profile.html'">
+            ✏️ Edit Profile
+        </button>
+
+        <br><br>
+        <!-- Change Password -->
+        <button onclick="window.location.href='change-password.html'">
+            🔐 Change Password
+        </button>
+
+        <br><br>
+        <!-- Back to Dashboard -->
+        <button onclick="window.location.href='dashboard.html'" style="background: #7f8c8d;">
+            ← Back to Dashboard
+        </button>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
