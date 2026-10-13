@@ -2,8 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
-require('dotenv').config(); // Also check project root .env
+require('dotenv').config({ path: path.join(__dirname, '../.env') }); // Root .env
+require('dotenv').config({ path: path.join(__dirname, '.env') }); // Backend .env fallback
+require('dotenv').config(); // Fallback for process.cwd()
 
 const { testConnection } = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
