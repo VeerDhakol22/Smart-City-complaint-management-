@@ -1,7 +1,8 @@
 // Centralized API client for Smart City Complaint Management System
-const API_BASE = (window.location.protocol === 'file:' || !window.location.origin.includes('5000'))
-    ? 'http://localhost:5000/api'
-    : '/api';
+// When served from the backend (Render, production, or localhost:5000), use '/api'.
+// Only fallback to 'http://localhost:5000/api' if opened via file:// or Live Server (port 5500/8080).
+const isExternalDevServer = window.location.protocol === 'file:' || ['5500', '8080', '3000'].includes(window.location.port);
+const API_BASE = isExternalDevServer ? 'http://localhost:5000/api' : '/api';
 
 /**
  * Universal fetch wrapper that manages session cookies, headers, and error handling.
