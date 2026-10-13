@@ -151,10 +151,10 @@ async function adminLogin(req, res) {
             });
         }
 
-        // Query by email, name, role, or matching 'admin' keyword
+        // Query by email, name, or role
         const [admins] = await pool.query(
-            'SELECT id, name, email, password_hash, role FROM admins WHERE email = ? OR name = ? OR role = ? OR ? = "admin" LIMIT 1',
-            [identifier.toLowerCase(), identifier, identifier.toLowerCase(), identifier.toLowerCase()]
+            'SELECT id, name, email, password_hash, role FROM admins WHERE email = ? OR name = ? OR role = ? LIMIT 1',
+            [identifier.toLowerCase(), identifier, identifier.toLowerCase()]
         );
 
         if (admins.length === 0) {
